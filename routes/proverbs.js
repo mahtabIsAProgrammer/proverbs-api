@@ -1,0 +1,62 @@
+import express from "express";
+import {
+  getProverbs,
+  saveProverbs,
+} from "../controllers/proverbsController.js";
+
+const router = express.Router();
+
+router.get("/", (req, res) => {
+  const proverbs = getProverbs();
+  res.json(proverbs);
+});
+
+router.get("/random", (req, res) => {
+  const proverbs = getProverbs();
+  const randomIndex = Math.floor(Math.random() * proverbs.length);
+  const randomproverb = proverbs[randomIndex];
+  res.json(randomproverb);
+});
+
+router.get("/:id", (req, res) => {
+  const proverbs = getProverbs();
+  const proverb = proverbs.find((p) => p.id == req.params.id);
+  if (proverb) res.json(proverb);
+  else res.status(404).json({ message: "Proverb not found" });
+});
+
+router.post("/", (req, res) => {
+  const { persionText, translationEn, meaning, category } = req.body;
+  const newProverb = {
+    id: Date.now(),
+    persionText,
+    translationEn,
+    meaning,
+    category,
+  };
+  saveProverbs(newProverb);
+  res.json(newProverb);
+});
+
+router.put("/:id", (req, res) => {
+  const proverbs = getProverbs();
+  const proverb = proverbs.find((p) => p.id == req.params.id);
+  if (proverb) {
+    proverb.persionText = req.body.persionText || proverb.persionText;
+    proverb.translationEn = req.body.translationEn || proverb.translationEn;
+    proverb.meaning = req.body.meaning || proverb.meaning;
+    proverb.category = req.body.category || proverb.category;
+    res.json(proverb);
+  } else {
+    res.status(404).json({ message: "PRoverb not found" });
+  }
+});
+
+router.delete("/:id", (req, res) => {
+  const proverbs = getProverbs();
+  const filtered = proverbs.filter((p) => p.id == req.params.id);
+  saveProverbs(filtered);
+  res.json({ message: "Proverb Deleted" });
+});
+
+export default router;

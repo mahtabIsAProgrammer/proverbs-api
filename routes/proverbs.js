@@ -7,7 +7,21 @@ import {
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const proverbs = getProverbs();
+  const { search, category } = req.query;
+  let proverbs = getProverbs();
+
+  if (search) {
+    proverbs = proverbs.filter((p) =>
+      p.text.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
+  if (category) {
+    proverbs = proverbs.filter(
+      (p) => p.category.toLowerCase() === category.toLowerCase()
+    );
+  }
+
   res.json(proverbs);
 });
 
@@ -53,9 +67,9 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  const proverbs = getProverbs();
-  const filtered = proverbs.filter((p) => p.id == req.params.id);
-  saveProverbs(filtered);
+  let proverbs = getProverbs();
+  proverbs = proverbs.filter((p) => p.id == req.params.id);
+  saveProverbs(proverbs);
   res.json({ message: "Proverb Deleted" });
 });
 

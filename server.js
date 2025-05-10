@@ -11,8 +11,8 @@ app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
 // API Routes
-app.use("/api/proverbs", proverbs);
-app.use("/api/categories", categories);
+app.use("/proverbs", proverbs);
+app.use("/categories", categories);
 
 app.listen(PORT, () => {
   console.log("Server Listening on PORT:", PORT);

@@ -40,6 +40,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  const proverbs = getProverbs();
   const { persionText, translationEn, meaning, category } = req.body;
   const newProverb = {
     id: Date.now(),
@@ -48,7 +49,8 @@ router.post("/", (req, res) => {
     meaning,
     category,
   };
-  saveProverbs(newProverb);
+  proverbs.push(newProverb);
+  saveProverbs(proverbs);
   res.json(newProverb);
 });
 
@@ -61,6 +63,7 @@ router.put("/:id", (req, res) => {
     proverb.meaning = req.body.meaning || proverb.meaning;
     proverb.category = req.body.category || proverb.category;
     res.json(proverb);
+    saveProverbs(proverbs);
   } else {
     res.status(404).json({ message: "PRoverb not found" });
   }
@@ -68,7 +71,10 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", (req, res) => {
   let proverbs = getProverbs();
-  proverbs = proverbs.filter((p) => p.id == req.params.id);
+  const id = req.params.id;
+  const proverbToDelete = proverbs.find((p) => p.id == id);
+  const index = proverbs.indexOf(proverbToDelete);
+  proverbs.splice(index, 1);
   saveProverbs(proverbs);
   res.json({ message: "Proverb Deleted" });
 });

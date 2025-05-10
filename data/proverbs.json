@@ -3,6 +3,7 @@
     "id": 1,
     "persionText": "از این ستون به آن ستون فرجه",
     "translationEn": "From this pillar to that one, there's relief.",
+    "translationGerman": "Von dieser Säule zur nächsten gibt es Erleichterung.",
     "meaning": "Sometimes delaying or waiting can bring unexpected solutions or relief.",
     "category": "Patience"
   },
@@ -10,6 +11,7 @@
     "id": 2,
     "persionText": "آب که از سر گذشت، چه یک وجب چه صد وجب",
     "translationEn": "Once water passes over your head, whether one inch or a hundred, it doesn't matter.",
+    "translationGerman": "Wenn das Wasser über den Kopf steigt, ist es egal, ob ein Zentimeter oder hundert.",
     "meaning": "When you're already in trouble, the extent of the problem doesn't really matter anymore.",
     "category": "Consequence"
   },
@@ -17,6 +19,7 @@
     "id": 3,
     "persionText": "گر صبر کنی ز غوره حلوا سازی",
     "translationEn": "If you're patient, you can make halva from unripe grapes.",
+    "translationGerman": "Mit Geduld kannst du aus unreifen Trauben Halva machen.",
     "meaning": "Patience and time can turn difficult situations into sweet outcomes.",
     "category": "Patience"
   },
@@ -24,6 +27,7 @@
     "id": 4,
     "persionText": "مرغ همسایه غاز است",
     "translationEn": "The neighbor’s chicken is a goose.",
+    "translationGerman": "Das Huhn des Nachbarn ist eine Gans.",
     "meaning": "What others have always seems better than what we have.",
     "category": "Comparison"
   },
@@ -31,14 +35,16 @@
     "id": 5,
     "persionText": "کار امروز را به فردا مینداز",
     "translationEn": "Don't postpone today’s work to tomorrow.",
+    "translationGerman": "Verschiebe die Arbeit von heute nicht auf morgen.",
     "meaning": "Don't procrastinate — do things on time.",
     "category": "Advice"
   },
   {
-    "id": 1746477624836,
-    "persionText": "از این ستون به آن ستون فرجه",
-    "translationEn": "From this pillarkjalkdjaskfalsflksflflsfskfjalksfef.",
-    "meaning": "Sometimes delaying or waiting can bring udjfakldsfjlksjflskajfsls or relief.",
-    "category": "Patdjfklfjsldience"
+    "id": 6,
+    "persionText": "تا نباشد چیزکی، مردم نگویند چیزها",
+    "translationEn": "There's always some truth behind gossip.",
+    "translationGerman": "Ohne Grund reden die Leute nicht.",
+    "meaning": "Unless there's something, people won’t say anything.",
+    "category": "Gossip"
   }
 ]

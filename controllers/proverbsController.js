@@ -7,8 +7,6 @@ export const getProverbs = () => {
   return JSON.parse(data);
 };
 
-export const saveProverbs = (proverb) => {
-  const proverbs = getProverbs();
-  proverbs.push(proverb);
+export const saveProverbs = (proverbs) => {
   writeFileSync(path, JSON.stringify(proverbs, null, 2));
 };

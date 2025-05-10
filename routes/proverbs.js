@@ -6,13 +6,18 @@ import {
 
 const router = express.Router();
 
+// GET Proverbs
 router.get("/", (req, res) => {
   const { search, category } = req.query;
   let proverbs = getProverbs();
 
+  // Getting proverbs by Search and Category
   if (search) {
+    const keyword = search.toLowerCase();
     proverbs = proverbs.filter((p) =>
-      p.persionText.toLowerCase().includes(search.toLowerCase())
+      [p.persionText, p.translationEn, p.translationGerman].some((field) =>
+        field.toLowerCase().includes(keyword)
+      )
     );
   }
 
@@ -25,6 +30,7 @@ router.get("/", (req, res) => {
   res.json(proverbs);
 });
 
+// GET Random Proverbs
 router.get("/random", (req, res) => {
   const proverbs = getProverbs();
   const randomIndex = Math.floor(Math.random() * proverbs.length);
@@ -32,6 +38,7 @@ router.get("/random", (req, res) => {
   res.json(randomproverb);
 });
 
+// GET proverbs By ID
 router.get("/:id", (req, res) => {
   const proverbs = getProverbs();
   const proverb = proverbs.find((p) => p.id == req.params.id);
@@ -39,27 +46,33 @@ router.get("/:id", (req, res) => {
   else res.status(404).json({ message: "Proverb not found" });
 });
 
+// POST New Proverb
 router.post("/", (req, res) => {
   const proverbs = getProverbs();
-  const { persionText, translationEn, meaning, category } = req.body;
+  const { persionText, translationEn, meaning, category, translationGerman } =
+    req.body;
   const newProverb = {
     id: Date.now(),
     persionText,
     translationEn,
     meaning,
     category,
+    translationGerman,
   };
   proverbs.push(newProverb);
   saveProverbs(proverbs);
   res.json(newProverb);
 });
 
+//  PUT aka Edit a proverb
 router.put("/:id", (req, res) => {
   const proverbs = getProverbs();
   const proverb = proverbs.find((p) => p.id == req.params.id);
   if (proverb) {
     proverb.persionText = req.body.persionText || proverb.persionText;
     proverb.translationEn = req.body.translationEn || proverb.translationEn;
+    proverb.translationGerman =
+      req.body.translationGerman || proverb.translationGerman;
     proverb.meaning = req.body.meaning || proverb.meaning;
     proverb.category = req.body.category || proverb.category;
     res.json(proverb);
@@ -69,6 +82,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
+// DELETE a Proverb
 router.delete("/:id", (req, res) => {
   let proverbs = getProverbs();
   const id = req.params.id;

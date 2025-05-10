@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
 
   if (search) {
     proverbs = proverbs.filter((p) =>
-      p.text.toLowerCase().includes(search.toLowerCase())
+      p.persionText.toLowerCase().includes(search.toLowerCase())
     );
   }
 

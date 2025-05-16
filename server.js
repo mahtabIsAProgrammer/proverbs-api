@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // API Routes
 app.use("/proverbs", proverbs);
 app.use("/categories", categories);
+app.use(cors());
 
 app.listen(PORT, () => {
   console.log("Server Listening on PORT:", PORT);

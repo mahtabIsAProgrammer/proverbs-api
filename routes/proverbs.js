@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
   if (search) {
     const keyword = search.toLowerCase();
     proverbs = proverbs.filter((p) =>
-      [p.persionText, p.translationEn, p.translationGerman].some((field) =>
+      [p.persionText, p.englishText, p.germanText].some((field) =>
         field.toLowerCase().includes(keyword)
       )
     );
@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
 
   if (category) {
     proverbs = proverbs.filter(
-      (p) => p.category.toLowerCase() === category.toLowerCase()
+      (p) => p.categories.toLowerCase() === category.toLowerCase()
     );
   }
 
@@ -49,15 +49,15 @@ router.get("/:id", (req, res) => {
 // POST New Proverb
 router.post("/", (req, res) => {
   const proverbs = getProverbs();
-  const { persionText, translationEn, meaning, category, translationGerman } =
+  const { persionText, englishText, meaning, categories, germanText } =
     req.body;
   const newProverb = {
     id: Date.now(),
     persionText,
-    translationEn,
+    englishText,
     meaning,
-    category,
-    translationGerman,
+    categories,
+    germanText,
   };
   proverbs.push(newProverb);
   saveProverbs(proverbs);
@@ -70,11 +70,10 @@ router.put("/:id", (req, res) => {
   const proverb = proverbs.find((p) => p.id == req.params.id);
   if (proverb) {
     proverb.persionText = req.body.persionText || proverb.persionText;
-    proverb.translationEn = req.body.translationEn || proverb.translationEn;
-    proverb.translationGerman =
-      req.body.translationGerman || proverb.translationGerman;
+    proverb.englishText = req.body.englishText || proverb.englishText;
+    proverb.germanText = req.body.germanText || proverb.germanText;
     proverb.meaning = req.body.meaning || proverb.meaning;
-    proverb.category = req.body.category || proverb.category;
+    proverb.categories = req.body.categories || proverb.categories;
     res.json(proverb);
     saveProverbs(proverbs);
   } else {

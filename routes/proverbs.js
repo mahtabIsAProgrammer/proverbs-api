@@ -22,9 +22,16 @@ router.get("/", (req, res) => {
   }
 
   if (category) {
-    proverbs = proverbs.filter(
-      (p) => p.categories.toLowerCase() === category.toLowerCase()
-    );
+    const categoryLower = category.toLowerCase();
+
+    proverbs = proverbs.filter((p) => {
+      if (Array.isArray(p.categories)) {
+        return p.categories.some((cat) => cat.toLowerCase() === categoryLower);
+      } else if (typeof p.categories === "string") {
+        return p.categories.toLowerCase() === categoryLower;
+      }
+      return false;
+    });
   }
 
   res.json(proverbs);
